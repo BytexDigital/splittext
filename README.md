@@ -7,3 +7,4 @@ TODO before v1 release
 - additional examples on demo website
 - host demo website
 - readme documentation
+- framer motion compatibility (separate package using core react as a dependency) ???
