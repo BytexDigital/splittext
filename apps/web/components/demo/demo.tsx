@@ -3,7 +3,7 @@
 import { CheckboxGroup, Checkbox } from '@nextui-org/checkbox';
 import { useState } from 'react';
 import { Resizable } from 're-resizable';
-import { SplitMode, SplitText } from '@splittext/dev';
+import { SplitText, SplitMode } from '@splittext/react';
 
 const Demo = () => {
   const [selected, setSelected] = useState(['word']);

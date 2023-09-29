@@ -1,5 +1,3 @@
-'use client';
-
 import Demo from '@/components/demo/demo';
 import QuickInstall from '@/components/landing/quick-install';
 import React from 'react';
