@@ -23,7 +23,7 @@ export default function Home() {
       <QuickInstall />
       <Demo />
       <ExampleContainer
-        link={'https://github.com/BytexDigital/splittext/tree/main/apps/web/components/demo'}
+        link={'https://github.com/BytexDigital/splittext/tree/main/apps/web/components/examples/example-one'}
         title="Char Split and Rotate"
       >
         <SplitCharRotation />
