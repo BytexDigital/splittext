@@ -2,7 +2,7 @@
 
 import { parseChildren } from './parse-children';
 import { createLines } from './create-lines';
-import React, { useId } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { immediateDebounce } from './utils';
 import './styles.css';
@@ -43,7 +43,7 @@ type SplitTextProps = ForwardRefComponent<
 
 const SplitTextBase = React.forwardRef(
   ({ as: Component = 'div', mode = 'word', options, onComplete, onResize, ...props }, forwardedRef) => {
-    const id = useId();
+    const id = React.useId();
 
     const ref = React.useRef<React.ElementRef<typeof Component> | null>(null);
 
