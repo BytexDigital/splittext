@@ -4,7 +4,6 @@ import { parseChildren } from './parse-children';
 import { createLines } from './create-lines';
 import React, { useId } from 'react';
 import ReactDOM from 'react-dom';
-import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect';
 import { immediateDebounce } from './utils';
 import './styles.css';
 import { SplitElements, SplitMode, SplitModesOptions } from './types';
@@ -42,14 +41,15 @@ type SplitTextProps = ForwardRefComponent<
   }
 >;
 
-export const SplitText = React.forwardRef(
+const SplitTextBase = React.forwardRef(
   ({ as: Component = 'div', mode = 'word', options, onComplete, onResize, ...props }, forwardedRef) => {
     const id = useId();
 
-    const ref = React.useRef<React.ElementRef<typeof Component>>(null);
+    const ref = React.useRef<React.ElementRef<typeof Component> | null>(null);
 
     // resize observer
     const resizeObserver = React.useRef<ResizeObserver | null>(null);
+    const resizeObserverContentRect = React.useRef<DOMRectReadOnly | undefined>(undefined);
 
     // has text been split
     const isSplit = React.useRef(false);
@@ -72,13 +72,27 @@ export const SplitText = React.forwardRef(
     //@ts-ignore
     React.useImperativeHandle(forwardedRef, () => ref.current);
 
-    useIsomorphicLayoutEffect(() => {
-      if (!ref.current) return;
+    const handleNodeRef = React.useCallback((node: React.ElementRef<typeof Component>) => {
+      ref.current = node;
 
-      // split text into lines only if user has specified line mode
-      if (hasLineMode) {
-        const split = (e?: any) => {
+      // setup resize observer to split text by lines on container parent resize if user has line mode enabled
+      if (hasLineMode && node) {
+        const split = (e: ResizeObserverEntry[]) => {
           if (!ref.current) return;
+
+          // check if resizeobserverentry contentRect has changed since last resize observer event and exit if not to prevent unnecessary rerenders
+          if (!resizeObserverContentRect.current) {
+            resizeObserverContentRect.current = e[0]?.contentRect;
+          } else {
+            if (
+              resizeObserverContentRect.current.width === e[0]?.contentRect.width
+              //resizeObserverContentRect.current.height === e[0]?.contentRect.height
+            ) {
+              return;
+            }
+
+            resizeObserverContentRect.current = e[0]?.contentRect;
+          }
 
           const splitElements = createLines(ref.current, hasCharMode, isSplit.current, id, options);
 
@@ -99,11 +113,11 @@ export const SplitText = React.forwardRef(
         resizeObserver.current.observe(ref.current?.parentElement!);
       }
 
-      return () => {
-        if (!ref.current) return;
-        if (!resizeObserver.current) return;
+      // disconnect resize observer when component is unmounted
+      if (!node) {
         resizeObserver.current?.disconnect();
-      };
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     React.useEffect(() => {
@@ -132,12 +146,13 @@ export const SplitText = React.forwardRef(
       }
 
       if (hasLineMode && forwardedRef && '_trigger' in forwardedRef) {
-        //(forwardedRef as { _trigger?: () => void })._trigger?.();
+        (forwardedRef as { _trigger?: () => void })._trigger?.();
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [elements]);
 
     return (
-      <Component {...props} ref={ref}>
+      <Component {...props} ref={handleNodeRef}>
         {/* <span className="sr-only">{props.children}</span> */}
         {elements.length > 0 ? elements : parseChildren(props.children, hasLineMode, hasCharMode, id, options)}
       </Component>
@@ -145,4 +160,6 @@ export const SplitText = React.forwardRef(
   },
 ) as SplitTextProps;
 
-SplitText.displayName = 'SplitText';
+SplitTextBase.displayName = 'SplitText';
+
+export const SplitText = React.memo(SplitTextBase, () => true);
