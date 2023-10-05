@@ -1,4 +1,6 @@
 import Demo from '@/components/demo/demo';
+import ExampleContainer from '@/components/examples/example-container';
+import SplitCharRotation from '@/components/examples/example-one';
 import QuickInstall from '@/components/landing/quick-install';
 import React from 'react';
 
@@ -20,6 +22,12 @@ export default function Home() {
       </div>
       <QuickInstall />
       <Demo />
+      <ExampleContainer
+        link={'https://github.com/BytexDigital/splittext/tree/main/apps/web/components/demo'}
+        title="Char Split and Rotate"
+      >
+        <SplitCharRotation />
+      </ExampleContainer>
     </main>
   );
 }
