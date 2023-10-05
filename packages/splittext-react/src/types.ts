@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 export type SplitMode = 'char' | 'word' | 'line';
 
 export type SplitElements = {
@@ -9,11 +11,11 @@ export type SplitElements = {
 export interface SplitModeOption {
   tag?: 'span' | 'div';
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   wrapper?: boolean;
   wrapperProps?: {
     className?: string;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
   };
 }
 
