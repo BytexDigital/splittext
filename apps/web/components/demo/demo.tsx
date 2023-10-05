@@ -1,48 +1,40 @@
 'use client';
 
 import { CheckboxGroup, Checkbox } from '@nextui-org/checkbox';
-import { useState } from 'react';
-import { Resizable } from 're-resizable';
+import { useEffect, useState } from 'react';
 import { SplitText, SplitMode } from '@splittext/react';
+import { useSplitText } from '@splittext/react/hooks';
 
 const Demo = () => {
   const [selected, setSelected] = useState(['word']);
+
+  const { scope, getScopedElements, key } = useSplitText();
+
+  useEffect(() => {
+    const elements = getScopedElements();
+    console.log('elements', elements);
+  }, [key]);
 
   return (
     <section className="max-w-md mx-auto text-[#1d1d1d] mt-12">
       <h3>Demo</h3>
       <div className="bg-white p-4 shadow-lg mt-2 rounded-xl">
-        <div>
-          <Resizable
-            bounds={'parent'}
-            enable={{
-              top: false,
-              right: true,
-              bottom: false,
-              left: true,
-              topRight: false,
-              bottomRight: false,
-              bottomLeft: false,
-              topLeft: false,
+        <div className="relative w-full h-full resize-x max-w-full min-w-[50%] overflow-hidden">
+          <SplitText
+            ref={scope}
+            key={selected.join('*')}
+            mode={selected as SplitMode[]}
+            options={{
+              line: { className: 'border border-[#1d1d1d]' },
+              word: { className: 'border border-[#1d1d1d]' },
+              char: { className: 'border border-[#1d1d1d]' },
             }}
-            className="-translate-x-1/2 left-1/2"
-            boundsByDirection={true}
           >
-            <SplitText
-              key={selected.join('*')}
-              mode={selected as SplitMode[]}
-              options={{
-                line: { className: 'border border-[#1d1d1d]' },
-                word: { className: 'border border-[#1d1d1d]' },
-                char: { className: 'border border-[#1d1d1d]' },
-              }}
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis lorem in nisl hendrerit egestas.
-              Donec malesuada convallis magna. <span className="text-orange-500">Quisque cursus dapibus.</span> Praesent
-              consequat metus a nisi ullamcorper, non pulvinar orci fermentum. Orci varius natoque penatibus et magnis
-              dis parturient montes, nascetur ridiculus mus.
-            </SplitText>
-          </Resizable>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis lorem in nisl hendrerit egestas. Donec
+            malesuada convallis magna. <span className="text-orange-500">Quisque cursus dapibus.</span> Praesent
+            consequat metus a nisi ullamcorper, non pulvinar orci fermentum. Orci varius natoque penatibus et magnis dis
+            parturient montes, nascetur ridiculus mus.
+          </SplitText>
         </div>
         <div className="my-4">
           <CheckboxGroup
