@@ -19,7 +19,7 @@ const Demo = () => {
     <section className="max-w-md mx-auto text-[#1d1d1d] mt-12">
       <h3>Demo</h3>
       <div className="bg-white p-4 shadow-lg mt-2 rounded-xl">
-        <div className="relative w-full h-full resize-x max-w-full min-w-[50%] overflow-hidden">
+        <div className="relative resize-x max-w-full min-w-[50%] overflow-hidden">
           <SplitText
             ref={scope}
             key={selected.join('*')}
