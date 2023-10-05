@@ -3,9 +3,9 @@
   "version": "0.5.0",
   "description": "A React Package For Splitting Text Into Characters, Words And Lines.",
   "private": false,
-  "repository": "https://github.com/eliassebastian/split-text-react.git",
+  "repository": "https://github.com/BytexDigital/splittext.git",
   "bugs": {
-    "url": "https://github.com/eliassebastian/split-text-react/issues"
+    "url": "https://github.com/BytexDigital/splittext/issues"
   },
   "type": "module",
   "exports": {
