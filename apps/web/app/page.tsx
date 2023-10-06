@@ -1,6 +1,7 @@
 import Demo from '@/components/demo/demo';
 import ExampleContainer from '@/components/examples/example-container';
 import SplitCharRotation from '@/components/examples/example-one';
+import FadeInSlideInLine from '@/components/examples/example-three';
 import FadeInByWords from '@/components/examples/example-two';
 import QuickInstall from '@/components/landing/quick-install';
 import React from 'react';
@@ -35,10 +36,12 @@ export default function Home() {
       >
         <FadeInByWords />
       </ExampleContainer>
+      <ExampleContainer
+        link={'https://github.com/BytexDigital/splittext/tree/main/apps/web/components/examples/example-three'}
+        title="Fade in/Slide In By Line"
+      >
+        <FadeInSlideInLine />
+      </ExampleContainer>
     </main>
   );
 }
-
-//#2f2f2f
-//#222222
-//#1f1f1f
