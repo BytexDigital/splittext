@@ -1,6 +1,7 @@
 import Demo from '@/components/demo/demo';
 import ExampleContainer from '@/components/examples/example-container';
 import SplitCharRotation from '@/components/examples/example-one';
+import FadeInByWords from '@/components/examples/example-two';
 import QuickInstall from '@/components/landing/quick-install';
 import React from 'react';
 
@@ -24,9 +25,15 @@ export default function Home() {
       <Demo />
       <ExampleContainer
         link={'https://github.com/BytexDigital/splittext/tree/main/apps/web/components/examples/example-one'}
-        title="Char Split and Rotate"
+        title="Split and Rotate By Char"
       >
         <SplitCharRotation />
+      </ExampleContainer>
+      <ExampleContainer
+        link={'https://github.com/BytexDigital/splittext/tree/main/apps/web/components/examples/example-two'}
+        title="Fade In By Word"
+      >
+        <FadeInByWords />
       </ExampleContainer>
     </main>
   );
