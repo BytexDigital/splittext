@@ -2,7 +2,7 @@
   will-change: transform;
   transform-style: preserve-3d;
   transition: 0.5s ease;
-  transition-delay: calc(0.05s * var(--str-char-index));
+  transition-delay: calc(0.1s * var(--str-char-index));
   transform-origin: bottom;
 }
 
@@ -14,7 +14,7 @@
   will-change: transform;
   transform-style: preserve-3d;
   transition: 0.5s ease;
-  transition-delay: calc(0.05s * var(--str-char-index));
+  transition-delay: calc(0.1s * var(--str-char-index));
   transform-origin: top;
   transform: translateY(100%) rotateX(-90deg);
 }
