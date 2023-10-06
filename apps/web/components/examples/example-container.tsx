@@ -14,7 +14,7 @@ const ExampleContainer = (props: ExampleContainerProps) => {
         <h3>{props.title}</h3>
         <Link
           href={props.link}
-          className="inline-flex gap-1 items-center justify-center"
+          className="inline-flex gap-px items-center justify-center"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -28,7 +28,7 @@ const ExampleContainer = (props: ExampleContainerProps) => {
           </svg>
         </Link>
       </div>
-      <div className="px-2 py-4 border rounded-xl border-[#f5f6f7] mt-2 bg-white grid place-items-center">
+      <div className="relative px-2 py-4 border rounded-xl border-[#f5f6f7] mt-2 bg-white grid place-items-center">
         {props.children}
       </div>
     </section>
