@@ -35,6 +35,7 @@ type SplitTextProps = ForwardRefComponent<
   {
     children: React.ReactNode;
     mode?: SplitMode | SplitMode[];
+    resizeDebounce?: number;
     options?: SplitModesOptions;
     onComplete?: (elements: SplitElements) => void;
     onResize?: (elements: SplitElements) => void;
@@ -42,7 +43,10 @@ type SplitTextProps = ForwardRefComponent<
 >;
 
 const SplitTextBase = React.forwardRef(
-  ({ as: Component = 'div', mode = 'word', options, onComplete, onResize, ...props }, forwardedRef) => {
+  (
+    { as: Component = 'div', mode = 'word', resizeDebounce = 500, options, onComplete, onResize, ...props },
+    forwardedRef,
+  ) => {
     const id = React.useId();
 
     const ref = React.useRef<React.ElementRef<typeof Component> | null>(null);
@@ -94,6 +98,7 @@ const SplitTextBase = React.forwardRef(
             resizeObserverContentRect.current = e[0]?.contentRect;
           }
 
+          // split text into lines
           const splitElements = createLines(ref.current, hasCharMode, isSplit.current, id, options);
 
           if (!isSplit.current) {
@@ -106,7 +111,7 @@ const SplitTextBase = React.forwardRef(
         };
 
         // debounce resize handler
-        const debouncedSplit = immediateDebounce(split, 500);
+        const debouncedSplit = immediateDebounce(split, resizeDebounce);
 
         //resize observer to split text on container parent resize
         resizeObserver.current = new ResizeObserver(debouncedSplit);
@@ -129,11 +134,11 @@ const SplitTextBase = React.forwardRef(
       }
 
       if (onComplete !== undefined || onResize !== undefined) {
-        const elements = {
-          chars: (hasCharMode && Array.from(ref.current.querySelectorAll("[data-str-type='char']") || [])) || [],
-          words: Array.from(ref.current.querySelectorAll("[data-str-type='word']") || []),
-          lines: (hasLineMode && Array.from(ref.current.querySelectorAll("[data-str-type='line']") || [])) || [],
-        } satisfies SplitElements;
+        const elements: SplitElements = {
+          chars: (hasCharMode && ref.current.querySelectorAll("[data-str-type='char']")) || undefined,
+          words: ref.current.querySelectorAll("[data-str-type='word']"),
+          lines: (hasLineMode && ref.current.querySelectorAll("[data-str-type='line']")) || undefined,
+        };
 
         if (!onCompleteCalled.current) {
           onCompleteCalled.current = true;
