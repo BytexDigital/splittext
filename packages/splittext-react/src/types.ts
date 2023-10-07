@@ -2,14 +2,14 @@ import type { CSSProperties } from 'react';
 
 export type SplitMode = 'char' | 'word' | 'line';
 
-export type SplitElements = {
-  chars: Element[];
-  words: Element[];
-  lines: Element[];
+export type SplitElements<C extends Element = Element, W extends Element = Element, L extends Element = Element> = {
+  chars: NodeListOf<C> | undefined;
+  words: NodeListOf<W> | undefined;
+  lines: NodeListOf<L> | undefined;
 };
 
 export interface SplitModeOption {
-  tag?: 'span' | 'div';
+  tag?: 'div' | 'span';
   className?: string;
   style?: CSSProperties;
   wrapper?: boolean;

@@ -4,21 +4,27 @@ import React from 'react';
 import { useConstant } from '../utils';
 import { SplitElements } from '../types';
 
-interface SplitTextScope<T = any> {
+interface SplitTextScope<T extends Element> {
   readonly current: T;
   _trigger: () => void;
 }
 
-const createScopedElements = (scope: SplitTextScope) => {
-  function scopedElements(): SplitElements {
+const createScopedElements = <
+  ScopeCurrentElementType extends Element = Element,
+  C extends Element = HTMLDivElement,
+  W extends Element = HTMLDivElement,
+  L extends Element = HTMLDivElement,
+>(
+  scope: SplitTextScope<ScopeCurrentElementType>,
+) => {
+  return (): SplitElements<C, W, L> => {
+    const { current } = scope;
     return {
-      chars: scope.current?.querySelectorAll('[data-str-type=char]') || [],
-      words: scope.current?.querySelectorAll('[data-str-type=word]') || [],
-      lines: scope.current?.querySelectorAll('[data-str-type=line]') || [],
+      chars: current?.querySelectorAll('[data-str-type=char]'),
+      words: current?.querySelectorAll('[data-str-type=word]'),
+      lines: current?.querySelectorAll('[data-str-type=line]'),
     };
-  }
-
-  return scopedElements;
+  };
 };
 
 export function useSplitText<T extends Element = any>() {
