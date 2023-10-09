@@ -13,7 +13,7 @@ export default function Home() {
         <div className="relative bg-[#182333] grid w-28 h-28 mx-auto p-2 z-0">
           <div className="absolute w-10/12 h-[10%] -top-[10%] -z-10 bg-[#455266] -translate-x-1/2 left-1/2"></div>
           <div className="absolute w-8/12 h-[10%] -top-[20%] -z-10 bg-[#909fb5] -translate-x-1/2 left-1/2"> </div>
-          <h1 className="mt-auto text-end font-medium text-2xl align-bottom self-end">
+          <h1 className="mt-auto text-end font-medium text-2xl align-bottom self-end text-white">
             <span className="block">Split</span>
             <span className="block">Text</span>
           </h1>
