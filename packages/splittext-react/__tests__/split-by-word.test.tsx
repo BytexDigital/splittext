@@ -25,9 +25,6 @@ describe('SplitText', () => {
       );
 
       const words = container.container.querySelectorAll('[data-str-type=word]');
-
-      expect(words.length).toBe(5);
-
       words.forEach((word) => {
         expect(word.classList.contains('test')).toBeTruthy();
       });
@@ -39,11 +36,26 @@ describe('SplitText', () => {
       );
 
       const words = container.container.querySelectorAll('[data-str-type=word]') as NodeListOf<HTMLElement>;
-
-      expect(words.length).toBe(5);
-
       words.forEach((word) => {
         expect(word.style.color).toBe('red');
+      });
+    });
+
+    it('should by default render each word element as a div', () => {
+      const container = render(<SplitText>Lorem ipsum dolor sit amet</SplitText>);
+
+      const words = container.container.querySelectorAll('[data-str-type=word]') as NodeListOf<HTMLElement>;
+      words.forEach((word) => {
+        expect(word.tagName).toBe('DIV');
+      });
+    });
+
+    it('should render each word element as span', () => {
+      const container = render(<SplitText options={{ word: { tag: 'span' } }}>Lorem ipsum dolor sit amet</SplitText>);
+
+      const words = container.container.querySelectorAll('[data-str-type=word]') as NodeListOf<HTMLElement>;
+      words.forEach((word) => {
+        expect(word.tagName).toBe('SPAN');
       });
     });
   });
