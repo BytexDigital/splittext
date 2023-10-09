@@ -1,4 +1,4 @@
-.fade_in_item [data-str-type='word'] {
+.item [data-str-type='word'] {
   opacity: 0;
   transition: opacity 0.5s ease;
   transition-delay: calc(0.2s * var(--str-word-index));
