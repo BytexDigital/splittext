@@ -3,6 +3,7 @@
   "version": "0.6.0",
   "description": "A React Package For Splitting Text Into Characters, Words And Lines.",
   "private": false,
+  "homepage": "https://splittext.pages.dev",
   "repository": "https://github.com/BytexDigital/splittext.git",
   "bugs": {
     "url": "https://github.com/BytexDigital/splittext/issues"
