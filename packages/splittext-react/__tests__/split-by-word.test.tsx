@@ -58,5 +58,28 @@ describe('SplitText', () => {
         expect(word.tagName).toBe('SPAN');
       });
     });
+
+    it('should render a wrapper element around each word', () => {
+      const container = render(<SplitText options={{ word: { wrapper: true } }}>Lorem ipsum dolor sit amet</SplitText>);
+
+      const words = container.container.querySelectorAll('[data-str-type=word]') as NodeListOf<HTMLElement>;
+      words.forEach((word) => {
+        expect(word.parentElement?.tagName).toBe('DIV');
+      });
+    });
+
+    it('should render a wrapper element around each word with a className & inline style', () => {
+      const container = render(
+        <SplitText options={{ word: { wrapper: true, wrapperProps: { className: 'test', style: { color: 'red' } } } }}>
+          Lorem ipsum dolor sit amet
+        </SplitText>,
+      );
+
+      const words = container.container.querySelectorAll('[data-str-type=word]') as NodeListOf<HTMLElement>;
+      words.forEach((word) => {
+        expect(word.parentElement?.classList.contains('test')).toBeTruthy();
+        expect(word.parentElement?.style.color).toBe('red');
+      });
+    });
   });
 });
