@@ -24,6 +24,10 @@ jobs:
           node-version: 18.x
           cache: 'pnpm'
 
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Build
+        run: pnpm run pages
+
       - name: Publish
         uses: cloudflare/pages-action@1
         with:

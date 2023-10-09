@@ -10,8 +10,8 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "turbo run publish && changeset publish",
-    "test": "vitest",
-    "test-watch": "vitest watch"
+    "test": "turbo run test",
+    "pages": "turbo run build --filter=web"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",

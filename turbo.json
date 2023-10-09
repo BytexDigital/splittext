@@ -3,9 +3,10 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "./dist/**", "./build/**", "!.next/cache/**"]
+      "outputs": [".next/**", "./dist/**", "./build/**", "!.next/cache/**", "./out/**"]
     },
     "lint": {},
+    "test": {},
     "dev": {
       "cache": false,
       "persistent": true
@@ -17,7 +18,11 @@
       "cache": false
     },
     "publish": {
-      "dependsOn": ["lint", "build"],
+      "dependsOn": ["lint", "test", "build"],
+      "cache": false
+    },
+    "pages": {
+      "dependsOn": ["lint", "test", "build"],
       "cache": false
     }
   }

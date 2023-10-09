@@ -48,7 +48,9 @@
     "dev": "pnpm build:swc -w",
     "types": "tsc --emitDeclarationOnly",
     "lint": "TIMING=1 eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
-    "clean": "rm -rf dist && rm -rf .turbo"
+    "clean": "rm -rf dist && rm -rf .turbo",
+    "test": "vitest",
+    "test:watch": "vitest watch"
   },
   "keywords": [
     "react",
