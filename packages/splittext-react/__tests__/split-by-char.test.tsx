@@ -5,11 +5,6 @@ import { SplitText } from '../src';
 
 describe('SplitText', () => {
   describe('SplitText -> Split By Char', () => {
-    it('should render without errors', () => {
-      const container = render(<SplitText mode={'char'}>Lorem ipsum dolor sit amet</SplitText>);
-      expect(container).not.toBeNull();
-    });
-
     it('should split into 26 characters', () => {
       const container = render(<SplitText mode={'char'}>Lorem ipsum dolor sit amet</SplitText>);
       const chars = container.container.querySelectorAll('[data-str-type=char]');

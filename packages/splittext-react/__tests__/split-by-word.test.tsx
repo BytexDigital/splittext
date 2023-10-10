@@ -6,12 +6,6 @@ import { SplitText } from '../src';
 
 describe('SplitText', () => {
   describe('SplitText -> Split By Word', () => {
-    it('should render without errors', () => {
-      const container = render(<SplitText>Lorem ipsum dolor sit amet</SplitText>);
-
-      expect(container).not.toBeNull();
-    });
-
     it('should split into 5 words', () => {
       const container = render(<SplitText>Lorem ipsum dolor sit amet</SplitText>);
 
