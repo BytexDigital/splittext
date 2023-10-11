@@ -99,6 +99,20 @@ Here is an example of how you can wrap each individual character with a wrapper 
 </SplitText>
 ```
 
+## Inline Elements
+
+Split Text supports inline elements when passed as children. For example, the following will render a link element inline with the text:
+
+```tsx
+<SplitText>
+  Lorem
+  <a href="https://www.lipsum.com/" target="_blank" rel="noopener noreferrer">
+    ipsum
+  </a>
+  dolor sit amet.
+</SplitText>
+```
+
 TODO before v1 release
 
 - playwright tests
