@@ -75,5 +75,23 @@ describe('SplitText', () => {
         expect(word.parentElement?.style.color).toBe('red');
       });
     });
+
+    it('should render an anchor tag when specified', () => {
+      const container = render(
+        <SplitText>
+          Lorem ipsum
+          <a href="https://splittext.pages.dev" className="test" style={{ color: 'red' }}>
+            dolor
+          </a>
+          sit amet
+        </SplitText>,
+      );
+
+      const words = container.container.querySelectorAll('[data-str-type=word]') as NodeListOf<HTMLElement>;
+
+      expect(words[2].parentElement?.tagName).toBe('A');
+      expect(words[2].parentElement?.classList.contains('test')).toBeTruthy();
+      expect(words[2].parentElement?.style.color).toBe('red');
+    });
   });
 });
