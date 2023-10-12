@@ -14,8 +14,13 @@ export default function Home() {
           <div className="absolute w-10/12 h-[10%] -top-[10%] -z-10 bg-[#455266] -translate-x-1/2 left-1/2"></div>
           <div className="absolute w-8/12 h-[10%] -top-[20%] -z-10 bg-[#909fb5] -translate-x-1/2 left-1/2"> </div>
           <h1 className="mt-auto text-end font-medium text-2xl align-bottom self-end text-white">
-            <span className="block">Split</span>
-            <span className="block">Text</span>
+            <span className="sr-only">Split Text</span>
+            <span className="block" aria-hidden>
+              Split
+            </span>
+            <span className="block" aria-hidden>
+              Text
+            </span>
           </h1>
         </div>
         <h2 className="text-center text-[#1d1d1d] my-12 text-lg">
