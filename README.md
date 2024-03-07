@@ -115,6 +115,6 @@ Split Text supports inline elements when passed as children. For example, the fo
 
 TODO before v1 release
 
-- playwright tests
-- readme documentation
+- playwright tests for testing line mode and resize
+- further readme documentation
 - framer motion compatibility (separate package using core react as a dependency) ???
