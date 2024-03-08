@@ -3,7 +3,7 @@ name: Pages
 on:
   push:
     paths:
-      - 'apps/web/**'
+      - 'apps/demo/**'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -34,7 +34,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: splittext
-          directory: ./out
+          directory: ./build/client
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerVersion: '3'
           workingDirectory: './apps/web'
