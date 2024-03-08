@@ -1,0 +1,57 @@
+{
+  "name": "demo",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "build": "remix vite:build",
+    "deploy": "wrangler pages deploy ./build/client",
+    "dev": "remix vite:dev",
+    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "start": "wrangler pages dev ./build/client",
+    "typecheck": "tsc",
+    "typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@nextui-org/checkbox": "^2.0.25",
+    "@nextui-org/snippet": "^2.0.31",
+    "@nextui-org/system": "^2.0.15",
+    "@nextui-org/theme": "^2.1.18",
+    "@remix-run/cloudflare": "^2.8.1",
+    "@remix-run/cloudflare-pages": "^2.8.1",
+    "@remix-run/react": "^2.8.1",
+    "@splittext/react": "workspace:^",
+    "framer-motion": "^10.18.0",
+    "isbot": "^4.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-resizable-panels": "^2.0.12",
+    "tailwind-merge": "^2.2.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240222.0",
+    "@remix-run/dev": "^2.8.1",
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "autoprefixer": "10.4.14",
+    "eslint": "^8.57.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "miniflare": "^3.20240304.0",
+    "node-fetch": "^3.3.2",
+    "postcss": "8.4.27",
+    "tailwindcss": "3.3.3",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5",
+    "vite-tsconfig-paths": "^4.3.1",
+    "wrangler": "^3.32.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
