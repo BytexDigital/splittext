@@ -37,4 +37,4 @@ jobs:
           directory: ./build/client
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerVersion: '3'
-          workingDirectory: './apps/web'
+          workingDirectory: './apps/demo'
