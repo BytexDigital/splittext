@@ -20,7 +20,6 @@ export const parseChildren = (
           .split(/(\n|\r|\p{P}|\s|\w+)/gu)
           .filter(Boolean)
           .map((word: string, wordIndex: number) => {
-            console.log('word', word, wordIndex, wordCount.current++);
             return React.createElement(
               child.type,
               {
