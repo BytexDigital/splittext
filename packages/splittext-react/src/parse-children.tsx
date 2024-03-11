@@ -1,6 +1,6 @@
 import React from 'react';
 import { createElement } from './create-element';
-import { SplitModesOptions } from './types';
+import type { SplitModesOptions } from './types';
 
 export const parseChildren = (
   children: React.ReactNode,
@@ -8,8 +8,9 @@ export const parseChildren = (
   splitChar: boolean,
   componentId: string,
   options?: SplitModesOptions,
+  count?: { current: number },
 ): React.ReactElement[] => {
-  let wordCount = 0;
+  const wordCount = count ?? { current: 0 };
 
   return React.Children.toArray(children).flatMap((child, index) => {
     // Check if this child is a nested react element, and if so, recurse into it
@@ -19,6 +20,7 @@ export const parseChildren = (
           .split(/(\n|\r|\p{P}|\s|\w+)/gu)
           .filter(Boolean)
           .map((word: string, wordIndex: number) => {
+            console.log('word', word, wordIndex, wordCount.current++);
             return React.createElement(
               child.type,
               {
@@ -27,7 +29,7 @@ export const parseChildren = (
                 'data-str-emb': '',
                 'data-str-component': '',
               },
-              parseChildren(word, splitLine, splitChar, componentId, options),
+              parseChildren(word, splitLine, splitChar, componentId, options, wordCount),
             );
           });
       }
@@ -40,7 +42,7 @@ export const parseChildren = (
           'data-str-emb': splitLine ? '' : undefined,
           'data-str-component': '',
         },
-        child.props.children ? parseChildren(child.props.children, splitLine, splitChar, componentId, options) : null,
+        child.props.children ? parseChildren(child.props.children, splitLine, splitChar, componentId, options, wordCount) : null,
       );
     }
 
@@ -75,12 +77,12 @@ export const parseChildren = (
             },
             {
               style: {
-                '--str-word-index': wordCount,
+                '--str-word-index': wordCount.current,
               },
             },
           );
 
-          wordCount++;
+          wordCount.current++;
           return element;
         });
     }
