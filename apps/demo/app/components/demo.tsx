@@ -16,9 +16,9 @@ export const Demo = () => {
               key={selected.join('*')}
               mode={selected}
               options={{
-                line: { className: 'border border-[#1d1d1d]' },
-                word: { className: 'border border-[#1d1d1d]' },
-                char: { className: 'border border-[#1d1d1d]' },
+                line: { className: 'outline outline-1 outline-[#1d1d1d]' },
+                word: { className: 'outline outline-1 outline-[#1d1d1d]' },
+                char: { className: 'outline outline-1 outline-[#1d1d1d]' },
               }}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis lorem in nisl hendrerit egestas. Donec
