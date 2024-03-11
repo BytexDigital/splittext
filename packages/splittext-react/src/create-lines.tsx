@@ -1,7 +1,7 @@
 import { createElement } from './create-element';
 import React from 'react';
 import { getStyleObjectFromString } from './utils';
-import { SplitModesOptions } from './types';
+import type { SplitModesOptions } from './types';
 
 const cloneElement = (node: HTMLElement, key: string, splitByChar: boolean, options?: SplitModesOptions) => {
   //const content = node.getAttribute !== undefined && node.getAttribute('data-str-data');
@@ -155,20 +155,20 @@ export const createLines: any = (
 
     return options?.line?.wrapper || options?.line?.wrapperProps?.className || options?.line?.wrapperProps?.style
       ? React.createElement(
-          'div',
-          {
-            key: `str-wrapper-line-${componentId}-${index}`,
-            className: options?.line?.wrapperProps?.className,
-            style: {
-              overflow: 'hidden',
-              verticalAlign: 'top',
-              ...options?.line?.wrapperProps?.style,
-              display: 'block',
-              position: 'relative',
-            },
+        'div',
+        {
+          key: `str-wrapper-line-${componentId}-${index}`,
+          className: options?.line?.wrapperProps?.className,
+          style: {
+            overflow: 'hidden',
+            verticalAlign: 'top',
+            ...options?.line?.wrapperProps?.style,
+            display: 'block',
+            position: 'relative',
           },
-          baseComponent,
-        )
+        },
+        baseComponent,
+      )
       : baseComponent;
   });
 };
