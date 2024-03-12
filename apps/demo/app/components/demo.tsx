@@ -1,6 +1,6 @@
 import { CheckboxGroup, Checkbox } from '@nextui-org/checkbox';
 import { useState } from 'react';
-import { SplitText } from '@splittext/react';
+import { type SplitMode, SplitText } from '@splittext/react';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './shared/resizable-panels';
 
 export const Demo = () => {
@@ -11,10 +11,10 @@ export const Demo = () => {
       <h3>Demo</h3>
       <div className="bg-sand-3 p-4 mt-2 rounded-xl">
         <ResizablePanelGroup direction="horizontal" className='max-w-md !overflow-visible'>
-          <ResizablePanel className=''>
+          <ResizablePanel className='!overflow-visible'>
             <SplitText
               key={selected.join('*')}
-              mode={selected}
+              mode={selected as SplitMode[]}
               options={{
                 line: { className: 'outline outline-1 outline-[#1d1d1d]' },
                 word: { className: 'outline outline-1 outline-[#1d1d1d]' },
@@ -22,8 +22,8 @@ export const Demo = () => {
               }}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis lorem in nisl hendrerit egestas. Donec
-              malesuada convallis magna. <span className="text-orange-500">Quisque cursus dapibus.</span> Praesent
-              consequat metus a nisi ullamcorper, non pulvinar orci fermentum. Orci varius natoque penatibus et magnis dis
+              malesuada convallis magna. <span className="text-orange-500 text-xl">Quisque cursus dapibus.</span> Praesent
+              consequat metus a nisi ullamcorper, non pulvinar orci fermentum. <span className='text-blue-800 text-xs'>Orci varius natoque</span> penatibus et magnis dis
               parturient montes, nascetur ridiculus mus.
             </SplitText>
           </ResizablePanel>
