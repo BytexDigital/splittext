@@ -66,13 +66,15 @@ const InternalSplitText = <T extends React.ElementType = 'div'>(
         lines: undefined,
       } satisfies SplitElements;
 
+      hasOnCompleteBeenCalled.current = true;
       onComplete?.(elements);
+      return;
     }
 
     // setup resize observer to split text by lines on container parent resize if user has line mode enabled
-    if (splitByLine && node) {
+    if (node && splitByLine) {
       const split = (e: ResizeObserverEntry[]) => {
-        if (!containerRef.current) return;
+        if (!containerRef.current || !internalRef.current) return;
 
         // check if resizeobserverentry contentRect has changed since last resize observer event and exit if not to prevent unnecessary rerenders
         if (!resizeObserverContentRect.current) {
@@ -97,28 +99,26 @@ const InternalSplitText = <T extends React.ElementType = 'div'>(
 
         ReactDOM.flushSync(() => {
           setElements(splitElements);
-
-          queueMicrotask(() => {
-            const elements = {
-              chars: (splitByChar && (internalRef.current as unknown as Element).querySelectorAll("[data-str-type='char']")) || undefined,
-              words: (internalRef.current as unknown as Element).querySelectorAll("[data-str-type='word']"),
-              lines: (splitByLine && (internalRef.current as unknown as Element).querySelectorAll("[data-str-type='line']")) || undefined,
-            } satisfies SplitElements;
-
-            // if onComplete or onResize callback is provided, call them with the split elements as arguments
-            if (!hasOnCompleteBeenCalled.current) {
-              hasOnCompleteBeenCalled.current = true;
-              onComplete?.(elements);
-            } else {
-              onResize?.(elements);
-            }
-
-            // if trigger method is available, call it to trigger scope update
-            if (splitByLine && ref && '_trigger' in ref) {
-              (ref as SplitTextScope<T>)._trigger?.();
-            }
-          });
         });
+
+        const elements = {
+          chars: (splitByChar && (internalRef.current as unknown as Element).querySelectorAll("[data-str-type='char']")) || undefined,
+          words: (internalRef.current as unknown as Element).querySelectorAll("[data-str-type='word']"),
+          lines: (splitByLine && (internalRef.current as unknown as Element).querySelectorAll("[data-str-type='line']")) || undefined,
+        } satisfies SplitElements;
+
+        // if onComplete or onResize callback is provided, call them with the split elements as arguments
+        if (!hasOnCompleteBeenCalled.current) {
+          hasOnCompleteBeenCalled.current = true;
+          onComplete?.(elements);
+        } else {
+          onResize?.(elements);
+        }
+
+        // if trigger method is available, call it to trigger scope update
+        if (splitByLine && ref && '_trigger' in ref) {
+          (ref as SplitTextScope<T>)._trigger?.();
+        }
       };
 
       // debounce resize handler
