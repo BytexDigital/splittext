@@ -10,23 +10,38 @@
   },
   "type": "module",
   "exports": {
-    ".": "./src/index.ts",
-    "./hooks": "./src/hooks/index.ts"
+    ".": {
+      "import": {
+        "types": "./dist/es/index.d.ts",
+        "default": "./dist/es/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.cts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    },
+    "./hooks": {
+      "import": {
+        "types": "./dist/es/hooks.d.ts",
+        "default": "./dist/es/hooks.js"
+      },
+      "require": {
+        "types": "./dist/cjs/hooks.d.cts",
+        "default": "./dist/cjs/hooks.cjs"
+      }
+    }
   },
   "files": [
-    "dist/**/*.{js,d.ts,css}"
+    "dist"
   ],
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "pnpm build:swc && pnpm types",
-    "build:swc": "swc src -d dist --copy-files",
-    "build:tsup": "tsup src",
-    "dev": "pnpm build:swc -w",
-    "dev:tsup": "tsup src --watch",
-    "types": "tsc --emitDeclarationOnly",
+    "type-check": "tsc --noEmit",
+    "build": "pnpm type-check && bunchee -m",
+    "dev": "bunchee --watch",
     "lint": "TIMING=1 eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
     "clean": "rm -rf dist && rm -rf .turbo",
     "test": "vitest",
@@ -44,18 +59,22 @@
   "license": "MIT",
   "devDependencies": {
     "@swc/cli": "^0.1.65",
-    "@swc/core": "^1.4.6",
+    "@swc/core": "^1.4.11",
     "@types/node": "20.4.6",
-    "@types/react": "^18.2.64",
+    "@types/react": "^18.2.74",
     "@types/react-dom": "18.2.7",
+    "bunchee": "^5.1.1",
     "chokidar": "^3.6.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^13.5.6",
     "tsup": "^8.0.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   },
   "peerDependencies": {
     "react": ">= 18.0.0",
     "react-dom": ">= 18.0.0"
-  }
+  },
+  "main": "./dist/es/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/es/index.d.ts"
 }
