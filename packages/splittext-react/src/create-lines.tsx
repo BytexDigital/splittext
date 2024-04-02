@@ -148,7 +148,6 @@ export const createLines: any = (
           '--str-line-index': index,
         },
         'data-str-type': 'line',
-        'aria-hidden': true,
       },
       line,
     );
